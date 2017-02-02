@@ -7,7 +7,8 @@ Vagrant build for a 2 node RabbitMQ Cluster.   Uses Atlas based RabbitMQ single 
 
 
 1) Clone the Repo:
-2) ./start-cluster.sh
+2) vagrant plugin install vagrant-hostmanager  (Used for automatically building /etc/hosts)
+3) ./start-cluster.sh
 
 To Verify:
 Browse to http://localhost:15672 and login with rabbit/rabbit
