@@ -1,20 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
 Vagrant.configure("2") do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  config.hostmanager.enabled = true
-  config.hostmanager.manage_host = false
-  config.hostmanager.manage_guest = true
+  # Went to a static method to remove dependency on plugin
+  #config.hostmanager.enabled = true
+  #config.hostmanager.manage_host = false
+  #config.hostmanager.manage_guest = true
+
+
   config.ssh.pty = true
 
   config.vm.define 'rabbit1', rabbit1: true do |rabbit1|
@@ -46,6 +40,8 @@ Vagrant.configure("2") do |config|
 
     rabbit1.vm.provision "shell", inline: "sudo systemctl restart rabbitmq-server.service"
     rabbit1.vm.provision "shell", path: "./scripts/create-rabbit-user.sh"
+    rabbit1.vm.provision "shell", path: "./scripts/add-hosts-file.sh"
+
 
   end
 
@@ -80,8 +76,9 @@ Vagrant.configure("2") do |config|
 
         node.vm.provision "shell", inline: "sudo systemctl restart rabbitmq-server.service"
         node.vm.provision "shell", path: "./scripts/create-rabbit-user.sh"
-
+        node.vm.provision "shell", path: "./scripts/add-hosts-file.sh"
         node.vm.provision "shell", path: "./scripts/cluster-join.sh"
+
 
     end
 
