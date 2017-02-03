@@ -2,7 +2,7 @@
 
 # This script is run on each host that will join the cluster.
 
-sudo rabbitmqctl stop_app
-sudo rabbitmqctl join_cluster rabbit@rabbit1
-sudo rabbitmqctl start_app
-sudo rabbitmqctl cluster_status
+rabbitmqctl stop_app
+rabbitmqctl join_cluster rabbit@rabbit1
+rabbitmqctl start_app
+rabbitmqctl cluster_status
